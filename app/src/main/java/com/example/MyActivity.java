@@ -36,18 +36,18 @@ public class MyActivity extends Activity implements BookListener {
 //Done,
 //        b.getEpub().goToNextPage();
 //        b.getEpub().goToPrevPage();
-
-
-        //TODO :
-        //b.goToPage(int);
-        //b.getPagesCount();
-        //b.getCurrentPageNumber();
-        //Listener BookFullyLoaded();
-
+//        b.getEpub().goToPage(int);
+//        b.getEpub().getSize();
+//        b.getEpub().getCurrentPageNumber();
     }
 
     @Override
     public void pageChanged(int page) {
+
+    }
+
+    @Override
+    public void bookFullyLoaded(int count) {
 
     }
 }

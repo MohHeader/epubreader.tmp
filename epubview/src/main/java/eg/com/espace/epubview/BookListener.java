@@ -5,4 +5,5 @@ package eg.com.espace.epubview;
  */
 public interface BookListener {
     void pageChanged(int page);
+    void bookFullyLoaded(int count);
 }

@@ -20,7 +20,6 @@ public class SetupBook extends AsyncTask<Integer,Void,Integer> {
     @Override
     protected void onPostExecute(Integer count) {
         super.onPostExecute(count);
-        bookView.setTotalPage(count);
-        bookView.getEpub().goToPage(1);
+        bookView.bookFullyLoaded(count);
     }
 }

@@ -82,4 +82,12 @@ public class BookView extends RelativeLayout implements BookListener {
 
         pageNumber.setText(String.valueOf(page));
     }
+
+    @Override
+    public void bookFullyLoaded(int count) {
+        if(publicListener != null)
+            publicListener.bookFullyLoaded(count);
+        setTotalPage(count);
+        getEpub().goToPage(1);
+    }
 }

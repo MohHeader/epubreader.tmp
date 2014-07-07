@@ -71,7 +71,7 @@ public class EpubView extends TextSwitcher implements Text.TouchListener {
 
     public void goToPage(int number){
         currentPageNumber = number;
-        if(number > book.getSize())
+        if(number > getBook().getSize())
             return;
         renderPage(book.getPage(number).getText());
 
@@ -80,7 +80,7 @@ public class EpubView extends TextSwitcher implements Text.TouchListener {
     }
 
     public void goToNextPage(){
-        if (currentPageNumber < book.getSize() )
+        if (currentPageNumber < getBook().getSize() )
             goToPage(currentPageNumber + 1);
     }
     public void goToPrevPage(){
