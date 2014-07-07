@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="characters_per_page">2048</integer>
+    <integer name="pop_view_x_offset">-220</integer>
+</resources>
