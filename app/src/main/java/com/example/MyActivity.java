@@ -4,14 +4,15 @@ import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 
-import com.espace.epubviewer.BookListener;
-import com.espace.epubviewer.BookView;
+
 import com.espace.epubviewer.R;
-import com.espace.epubviewer.DIRECTION;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import eg.com.espace.epubview.BookListener;
+import eg.com.espace.epubview.BookView;
+import eg.com.espace.epubview.DIRECTION;
 
 public class MyActivity extends Activity implements BookListener {
 
@@ -30,7 +31,7 @@ public class MyActivity extends Activity implements BookListener {
         }
 
         b.setBookListener(this);
-        b.setDirection(DIRECTION.RTL);
+        b.setDirection(DIRECTION.LTR);
 
 //Done,
 //        b.getEpub().goToNextPage();
