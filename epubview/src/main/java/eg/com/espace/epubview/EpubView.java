@@ -151,4 +151,8 @@ public class EpubView extends TextSwitcher implements Text.TouchListener {
         }
         super.onRestoreInstanceState(state);
     }
+
+    public void setTextIsSelectable(boolean selectable){
+        textView.setTextIsSelectable(selectable);
+    }
 }

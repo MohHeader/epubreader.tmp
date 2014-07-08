@@ -106,4 +106,7 @@ public class BookView extends RelativeLayout implements BookListener {
     public int getCurrentPageNumber(){
         return getEpub().getCurrentPageNumber();
     }
+    public void setTextIsSelectable(boolean selectable){
+        getEpub().setTextIsSelectable(selectable);
+    }
 }

@@ -18,7 +18,6 @@ public class Text extends TextView {
         listener = epub;
         setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
         gestureDetector = new GestureDetector(context, new GestureListener());
-        setTextIsSelectable(true);
     }
 
     public Text(Context context, AttributeSet attrs) {

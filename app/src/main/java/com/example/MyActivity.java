@@ -39,6 +39,7 @@ public class MyActivity extends Activity implements BookListener {
 //        b.goToPage(3);
 //        b.getSize();
 //        b.getCurrentPageNumber();
+        b.setTextIsSelectable(true);
     }
 
     @Override
