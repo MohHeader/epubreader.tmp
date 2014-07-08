@@ -61,7 +61,6 @@ public class EpubBook {
     }
 
     public EpubChapter getChapter(int number){
-        Log.d("DEBUG","getChapter : "+number);
         if(chapters.get(number) == null){
             chapters.put(number, new EpubChapter(this, book.getContents().get(number)));
         }

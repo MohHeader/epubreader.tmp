@@ -22,8 +22,27 @@ public class EpubPage {
         return text;
     }
 
+    public int getChapterNumber(){
+        return page.getChapter();
+    }
+
+    public int getCharStart(){
+        return page.getCharStart();
+    }
+
     public static EpubPage convertModelPage(EpubBook _book, Page mpage) {
         book = _book;
         return new EpubPage(mpage);
+    }
+
+    public static int getPageNumberAt(int _chapter, int aChar){
+        Page page = book.getPageDB().getPageAt(book.getBookId(),
+                book.getContext().getResources().getConfiguration().orientation,
+                _chapter,aChar);
+        if (page != null) {
+            return page.getPageNumber();
+        }else {
+            return 0;
+        }
     }
 }

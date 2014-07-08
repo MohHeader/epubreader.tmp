@@ -84,7 +84,7 @@ public class BookView extends RelativeLayout implements BookListener {
         if(publicListener != null)
             publicListener.bookFullyLoaded(count);
         setTotalPage(count);
-        getEpub().goToPage(1);
+        getEpub().goToPage(getEpub().getCurrentPageNumber());
     }
 
     // Delegate Methods

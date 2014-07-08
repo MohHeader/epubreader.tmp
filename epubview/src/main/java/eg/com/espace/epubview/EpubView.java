@@ -1,6 +1,8 @@
 package eg.com.espace.epubview;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextSwitcher;
 
 import eg.com.espace.epubview.book.EpubBook;
+import eg.com.espace.epubview.book.EpubPage;
 import eg.com.espace.epubview.models.PageDBHandler;
 
 /**
@@ -127,5 +130,25 @@ public class EpubView extends TextSwitcher implements Text.TouchListener {
 
     public int getSize() {
         return book.getSize();
+    }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("instanceState", super.onSaveInstanceState());
+        bundle.putInt("currentChapter", getBook().getPage(getCurrentPageNumber()).getChapterNumber());
+        bundle.putInt("currentChar", getBook().getPage(getCurrentPageNumber()).getCharStart());
+        return bundle;
+    }
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof Bundle) {
+            Bundle bundle = (Bundle) state;
+            int currentChapter = bundle.getInt("currentChapter");
+            int currentChar = bundle.getInt("currentChar");
+            currentPageNumber = EpubPage.getPageNumberAt(currentChapter, currentChar);
+            state = bundle.getParcelable("instanceState");
+        }
+        super.onRestoreInstanceState(state);
     }
 }
