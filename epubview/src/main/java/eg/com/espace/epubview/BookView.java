@@ -16,6 +16,7 @@
 package eg.com.espace.epubview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
@@ -123,5 +124,14 @@ public class BookView extends RelativeLayout implements BookListener {
     }
     public void setTextIsSelectable(boolean selectable){
         getEpub().setTextIsSelectable(selectable);
+    }
+
+    public void setNightMode(boolean nightMode) {
+        if(nightMode){
+            setBackgroundColor(Color.BLACK);
+        }else{
+            setBackgroundColor(Color.WHITE);
+        }
+        getEpub().setNightMode(nightMode);
     }
 }

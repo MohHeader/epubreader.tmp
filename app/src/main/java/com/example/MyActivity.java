@@ -40,6 +40,7 @@ public class MyActivity extends Activity implements BookListener {
 //        b.getSize();
 //        b.getCurrentPageNumber();
         b.setTextIsSelectable(true);
+        b.setNightMode(false);
     }
 
     @Override

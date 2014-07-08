@@ -16,6 +16,7 @@
 package eg.com.espace.epubview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextPaint;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextSwitcher;
+import android.widget.TextView;
 
 import eg.com.espace.epubview.book.EpubBook;
 import eg.com.espace.epubview.book.EpubPage;
@@ -169,5 +171,16 @@ public class EpubView extends TextSwitcher implements Text.TouchListener {
 
     public void setTextIsSelectable(boolean selectable){
         textView.setTextIsSelectable(selectable);
+    }
+
+    public void setNightMode(boolean nightMode) {
+        for (int i = 0;i < getChildCount();i++){
+            TextView text = (TextView) getChildAt(i);
+            if(nightMode){
+                text.setTextColor(Color.WHITE);
+            }else{
+                text.setTextColor(Color.BLACK);
+            }
+        }
     }
 }
