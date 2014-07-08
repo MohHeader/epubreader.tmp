@@ -23,8 +23,6 @@ import nl.siegmann.epublib.domain.Book;
  * Created by mohheader on 12/06/14.
  */
 public class EpubBook {
-    final private Object lock = new Object();
-
     private EpubView epubView;
     private Context context;
     private SparseArray<EpubChapter> chapters;
@@ -106,16 +104,6 @@ public class EpubBook {
     }
 
     public int getContentsSize(){
-        synchronized (lock) {
-            while (resources_size == -1) {
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            lock.notify();
-        }
         return resources_size;
     }
 
