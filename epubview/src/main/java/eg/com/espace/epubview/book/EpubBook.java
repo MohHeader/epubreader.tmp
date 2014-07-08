@@ -81,31 +81,11 @@ public class EpubBook {
         return context;
     }
 
-    public Page getCurrentPageModel() {
-        if (pages == null)
-            return null;
-        return pages.get(Math.min(epubView.getCurrentPageNumber(),pages.size())-1).getPageModel();
-    }
-
     public int getSize() {
         if (pages != null)
             return pages.size();
         else
             return 0;
-    }
-
-    public SparseArray<EpubChapter> getChapters() {
-        synchronized (lock) {
-            while (chapters == null) {
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            lock.notify();
-            return chapters;
-        }
     }
 
     public String getBookId() {

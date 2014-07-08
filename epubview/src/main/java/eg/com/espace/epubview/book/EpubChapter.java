@@ -20,15 +20,9 @@ public class EpubChapter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setTitle(r);
     }
 
     public CharSequence getText() {
         return text;
     }
-
-    private void setTitle(Resource r){
-        title = r.getTitle();
-    }
-
 }

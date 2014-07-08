@@ -109,11 +109,6 @@ public class EpubView extends TextSwitcher implements Text.TouchListener {
         return book;
     }
 
-    public void resetAnimation(){
-        setInAnimation(null);
-        setOutAnimation(null);
-    }
-
     public int getCurrentPageNumber() {
         return currentPageNumber;
     }
@@ -128,5 +123,9 @@ public class EpubView extends TextSwitcher implements Text.TouchListener {
 
     public TextPaint getTextPaint(){
         return textView.getPaint();
+    }
+
+    public int getSize() {
+        return book.getSize();
     }
 }

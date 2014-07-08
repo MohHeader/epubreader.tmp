@@ -67,11 +67,7 @@ public class BookView extends RelativeLayout implements BookListener {
         publicListener = listener;
     }
 
-    public void setDirection(DIRECTION dir){
-        epubView.setDirection(dir);
-    }
-
-    public EpubView getEpub(){
+    private EpubView getEpub(){
         return epubView;
     }
 
@@ -89,5 +85,25 @@ public class BookView extends RelativeLayout implements BookListener {
             publicListener.bookFullyLoaded(count);
         setTotalPage(count);
         getEpub().goToPage(1);
+    }
+
+    // Delegate Methods
+    public void setDirection(DIRECTION dir){
+        epubView.setDirection(dir);
+    }
+    public void goToNextPage(){
+        getEpub().goToNextPage();
+    }
+    public void goToPrevPage(){
+        getEpub().goToPrevPage();
+    }
+    public void goToPage(int n){
+        getEpub().goToPage(n);
+    };
+    public int getSize(){
+        return getEpub().getSize();
+    }
+    public int getCurrentPageNumber(){
+        return getEpub().getCurrentPageNumber();
     }
 }

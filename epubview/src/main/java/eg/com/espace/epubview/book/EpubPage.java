@@ -22,11 +22,6 @@ public class EpubPage {
         return text;
     }
 
-
-    public Page getPageModel() {
-        return page;
-    }
-
     public static EpubPage convertModelPage(EpubBook _book, Page mpage) {
         book = _book;
         return new EpubPage(mpage);

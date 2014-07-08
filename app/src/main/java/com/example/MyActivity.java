@@ -34,11 +34,11 @@ public class MyActivity extends Activity implements BookListener {
         b.setDirection(DIRECTION.LTR);
 
 //Done,
-//        b.getEpub().goToNextPage();
-//        b.getEpub().goToPrevPage();
-//        b.getEpub().goToPage(int);
-//        b.getEpub().getSize();
-//        b.getEpub().getCurrentPageNumber();
+//        b.goToNextPage();
+//        b.goToPrevPage();
+//        b.goToPage(3);
+//        b.getSize();
+//        b.getCurrentPageNumber();
     }
 
     @Override
