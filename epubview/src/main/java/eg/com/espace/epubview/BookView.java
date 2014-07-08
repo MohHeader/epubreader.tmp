@@ -34,9 +34,9 @@ import nl.siegmann.epublib.epub.EpubReader;
  * Created by mohheader on 06/07/14.
  */
 public class BookView extends RelativeLayout implements BookListener {
-    EpubView epubView;
-    TextView pageNumber,pageTotal;
-    BookListener publicListener;
+    private EpubView epubView;
+    private TextView pageNumber,pageTotal;
+    private BookListener publicListener;
 
     public BookView(Context context) {
         this(context, null);
@@ -125,7 +125,6 @@ public class BookView extends RelativeLayout implements BookListener {
     public void setTextIsSelectable(boolean selectable){
         getEpub().setTextIsSelectable(selectable);
     }
-
     public void setNightMode(boolean nightMode) {
         if(nightMode){
             setBackgroundColor(Color.BLACK);
