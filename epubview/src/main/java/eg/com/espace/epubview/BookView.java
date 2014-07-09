@@ -90,4 +90,7 @@ public class BookView extends RelativeLayout implements BookListener {
         setTotalPage(count);
         getEpub().goToPage(1);
     }
+    public  void onPause() {
+        epubView.getBook().getEpubCreator().setInturrupted();
+    }
 }

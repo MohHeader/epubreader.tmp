@@ -143,4 +143,7 @@ public class EpubBook {
     public PageDBHandler getPageDB() {
         return pageDB;
     }
+    public EpubCreator getEpubCreator(){
+        return epubCreator;
+    }
 }

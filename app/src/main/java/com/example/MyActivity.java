@@ -15,14 +15,14 @@ import eg.com.espace.epubview.BookView;
 import eg.com.espace.epubview.DIRECTION;
 
 public class MyActivity extends Activity implements BookListener {
-
+    BookView b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.epub_activity);
 
         AssetManager assetManager = getAssets();
-        BookView b = (BookView) findViewById(R.id.book_view);
+        b = (BookView) findViewById(R.id.book_view);
         try {
             InputStream is = assetManager.open("sample.epub");
             b.setBook(is,"2");
@@ -39,6 +39,12 @@ public class MyActivity extends Activity implements BookListener {
 //        b.getEpub().goToPage(int);
 //        b.getEpub().getSize();
 //        b.getEpub().getCurrentPageNumber();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        b.onPause();
     }
 
     @Override
