@@ -1,14 +1,34 @@
+/*
+ * Copyright (C) 2014 eSpace Technologies <http://www.espace.com.eg>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eg.com.espace.epubview;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextSwitcher;
+import android.widget.TextView;
 
 import eg.com.espace.epubview.book.EpubBook;
+import eg.com.espace.epubview.book.EpubPage;
 import eg.com.espace.epubview.models.PageDBHandler;
 
 /**
@@ -109,11 +129,6 @@ public class EpubView extends TextSwitcher implements Text.TouchListener {
         return book;
     }
 
-    public void resetAnimation(){
-        setInAnimation(null);
-        setOutAnimation(null);
-    }
-
     public int getCurrentPageNumber() {
         return currentPageNumber;
     }
@@ -128,5 +143,44 @@ public class EpubView extends TextSwitcher implements Text.TouchListener {
 
     public TextPaint getTextPaint(){
         return textView.getPaint();
+    }
+
+    public int getSize() {
+        return book.getSize();
+    }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("instanceState", super.onSaveInstanceState());
+        bundle.putInt("currentChapter", getBook().getPage(getCurrentPageNumber()).getChapterNumber());
+        bundle.putInt("currentChar", getBook().getPage(getCurrentPageNumber()).getCharStart());
+        return bundle;
+    }
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof Bundle) {
+            Bundle bundle = (Bundle) state;
+            int currentChapter = bundle.getInt("currentChapter");
+            int currentChar = bundle.getInt("currentChar");
+            currentPageNumber = EpubPage.getPageNumberAt(currentChapter, currentChar);
+            state = bundle.getParcelable("instanceState");
+        }
+        super.onRestoreInstanceState(state);
+    }
+
+    public void setTextIsSelectable(boolean selectable){
+        textView.setTextIsSelectable(selectable);
+    }
+
+    public void setNightMode(boolean nightMode) {
+        for (int i = 0;i < getChildCount();i++){
+            TextView text = (TextView) getChildAt(i);
+            if(nightMode){
+                text.setTextColor(Color.WHITE);
+            }else{
+                text.setTextColor(Color.BLACK);
+            }
+        }
     }
 }

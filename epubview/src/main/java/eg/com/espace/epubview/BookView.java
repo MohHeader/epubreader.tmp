@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2014 eSpace Technologies <http://www.espace.com.eg>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eg.com.espace.epubview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
@@ -18,9 +34,9 @@ import nl.siegmann.epublib.epub.EpubReader;
  * Created by mohheader on 06/07/14.
  */
 public class BookView extends RelativeLayout implements BookListener {
-    EpubView epubView;
-    TextView pageNumber,pageTotal;
-    BookListener publicListener;
+    private EpubView epubView;
+    private TextView pageNumber,pageTotal;
+    private BookListener publicListener;
 
     public BookView(Context context) {
         this(context, null);
@@ -67,11 +83,7 @@ public class BookView extends RelativeLayout implements BookListener {
         publicListener = listener;
     }
 
-    public void setDirection(DIRECTION dir){
-        epubView.setDirection(dir);
-    }
-
-    public EpubView getEpub(){
+    private EpubView getEpub(){
         return epubView;
     }
 
@@ -88,7 +100,38 @@ public class BookView extends RelativeLayout implements BookListener {
         if(publicListener != null)
             publicListener.bookFullyLoaded(count);
         setTotalPage(count);
-        getEpub().goToPage(1);
+        getEpub().goToPage(getEpub().getCurrentPageNumber());
+    }
+
+    // Delegate Methods
+    public void setDirection(DIRECTION dir){
+        epubView.setDirection(dir);
+    }
+    public void goToNextPage(){
+        getEpub().goToNextPage();
+    }
+    public void goToPrevPage(){
+        getEpub().goToPrevPage();
+    }
+    public void goToPage(int n){
+        getEpub().goToPage(n);
+    };
+    public int getSize(){
+        return getEpub().getSize();
+    }
+    public int getCurrentPageNumber(){
+        return getEpub().getCurrentPageNumber();
+    }
+    public void setTextIsSelectable(boolean selectable){
+        getEpub().setTextIsSelectable(selectable);
+    }
+    public void setNightMode(boolean nightMode) {
+        if(nightMode){
+            setBackgroundColor(Color.BLACK);
+        }else{
+            setBackgroundColor(Color.WHITE);
+        }
+        getEpub().setNightMode(nightMode);
     }
     public  void onPause() {
         epubView.getBook().getEpubCreator().setInturrupted();

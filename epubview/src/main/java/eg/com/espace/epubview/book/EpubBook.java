@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2014 eSpace Technologies <http://www.espace.com.eg>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package eg.com.espace.epubview.book;
 
 import android.app.Activity;
@@ -23,8 +38,6 @@ import nl.siegmann.epublib.domain.Book;
  * Created by mohheader on 12/06/14.
  */
 public class EpubBook {
-    final private Object lock = new Object();
-
     private EpubView epubView;
     private Context context;
     private SparseArray<EpubChapter> chapters;
@@ -61,7 +74,6 @@ public class EpubBook {
     }
 
     public EpubChapter getChapter(int number){
-        Log.d("DEBUG","getChapter : "+number);
         if(chapters.get(number) == null){
             chapters.put(number, new EpubChapter(this, book.getContents().get(number)));
         }
@@ -81,31 +93,11 @@ public class EpubBook {
         return context;
     }
 
-    public Page getCurrentPageModel() {
-        if (pages == null)
-            return null;
-        return pages.get(Math.min(epubView.getCurrentPageNumber(),pages.size())-1).getPageModel();
-    }
-
     public int getSize() {
         if (pages != null)
             return pages.size();
         else
             return 0;
-    }
-
-    public SparseArray<EpubChapter> getChapters() {
-        synchronized (lock) {
-            while (chapters == null) {
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            lock.notify();
-            return chapters;
-        }
     }
 
     public String getBookId() {
@@ -127,16 +119,6 @@ public class EpubBook {
     }
 
     public int getContentsSize(){
-        synchronized (lock) {
-            while (resources_size == -1) {
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            lock.notify();
-        }
         return resources_size;
     }
 
